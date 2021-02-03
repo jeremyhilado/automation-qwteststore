@@ -36,4 +36,23 @@ describe('Authentication Tests', function() {
         loginPage.passwordRequiredMessage.waitForDisplayed()
         assert('Password is required', loginPage.passwordRequiredMessage.getText())
     })
+
+    it('should get email required error message', () => {
+        browser.url('/')
+        homePage.clickSignInButton()
+        loginPage.enterPassword('desk1')
+        loginPage.clickLoginButton()
+        loginPage.emailRequiredMessage.waitForDisplayed()
+        assert('Email address is required', loginPage.emailRequiredMessage.getText())
+    })    
+
+    it('should get email and password required error messages', () => {
+        browser.url('/')
+        homePage.clickSignInButton()
+        loginPage.clickLoginButton()
+        loginPage.emailRequiredMessage.waitForDisplayed()
+        loginPage.passwordRequiredMessage.waitForDisplayed()
+        assert('Email address is required', loginPage.emailRequiredMessage.getText())
+        assert('Password is required', loginPage.passwordRequiredMessage.getText())
+    })
 })

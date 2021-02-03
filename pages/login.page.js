@@ -4,6 +4,7 @@ class Login {
     get loginButton() { return $("//*[@type='submit']") }
     get loginErrorMessage() { return $('.content p:nth-child(2)') }
     get passwordRequiredMessage() { return $("//p[text()='Password is required']") }
+    get emailRequiredMessage() { return $("//p[text()='Email address is required']") }
 
     enterEmail(text) {
         this.emailInput.waitForDisplayed()
