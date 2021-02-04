@@ -5,7 +5,7 @@ const cartPage = require('../pages/cart.page')
 const loginPage = require('../pages/login.page')
 const myaccountPage = require('../pages/myaccount.page')
 
-describe('Add To Cart', function() {
+describe('Add To Cart Tests', function() {
     it('should add 1 item to cart', () => {
         browser.url('/')
         homePage.clickProduct(1)

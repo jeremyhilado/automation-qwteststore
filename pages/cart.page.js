@@ -2,7 +2,7 @@ class Cart {
     get productCost() { return $('.meta') }
     get subTotal() { return $("//div[@class='ui large clearing segment']/span") }
     get checkoutButton() { return $("//button[text()='Check out']") } 
-    get emailInput() { return $("//input[@type='email']") }
+    get emailInput() { return $("//input[@placeholder='Email']") }
     get nameInput() { return $("//input[@placeholder='Name']") }
     get streetInput() { return $("//input[@placeholder='Street']") }
     get cityInput() { return $("//input[@placeholder='City']") }
@@ -11,8 +11,9 @@ class Cart {
     get cardNumberInput() { return $("//input[@placeholder='Card number']") }
     get cardExpirationInput() { return $("//input[@placeholder='MM / YY']") }
     get cvcInput() { return $("//input[@placeholder='CVC']") }
-    get payButton() { return $("//span[text()='Pay ']")}
-    get orderSuccessMessage() { return $("//div[@class='header']") } 
+    get payButton() { return $("//button[@type='submit']")}
+    get orderSuccessMessage() { return $("//div[text()='Your placed!']") } 
+    get iFrame() { return $("//iframe[@name='stripe_checkout_app']") }
 
     clickCheckoutButton() {
         this.checkoutButton.waitForDisplayed()
