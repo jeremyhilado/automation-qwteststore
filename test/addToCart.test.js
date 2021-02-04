@@ -1,0 +1,62 @@
+const { assert } = require('chai')
+const homePage = require('../pages/home.page')
+const productDetailPage = require('../pages/productDetail.page')
+const cartPage = require('../pages/cart.page')
+const loginPage = require('../pages/login.page')
+const myaccountPage = require('../pages/myaccount.page')
+
+describe('Add To Cart', function() {
+    it('should add 1 item to cart', () => {
+        browser.url('/')
+        homePage.clickProduct(1)
+        productDetailPage.clickAddToCartButton()
+        assert('Cart (1)', productDetailPage.cart.getText())
+    })
+
+    it('should add a 2nd item to cart', () => {
+        productDetailPage.clickHomePageLink()
+        homePage.clickProduct(2)
+        productDetailPage.clickAddToCartButton()
+        assert('Cart (2)', productDetailPage.cart.getText())
+    })
+
+    it('should add same item multiple times', () => {
+        browser.reloadSession()
+        browser.url('/')
+        homePage.clickProduct(1)
+        productDetailPage.clickAddToCartButton()
+        productDetailPage.clickHomePageLink()
+        homePage.clickProduct(1)
+        productDetailPage.clickAddToCartButton()
+        assert('Cart (2)', productDetailPage.cart.getText())
+    })
+
+    it('product price should be the same on details page and cart screen', () => {
+        browser.reloadSession()
+        browser.url('/')
+        homePage.clickProduct(1)
+        productDetailPage.clickAddToCartButton()
+        productDetailPage.clickCart()
+        assert('1x $325.00', cartPage.productCost.getText())
+        assert('Sub total: $325.00', cartPage.subTotal.getText())
+    })
+
+    it('cart should not change after sign out or sign in', () => {
+        browser.reloadSession()
+        browser.url('/')
+        homePage.clickSignInButton()
+        loginPage.enterEmail('desk@desk.com')
+        loginPage.enterPassword('desk1')
+        myaccountPage.clickHomePageLink()
+        homePage.clickProduct(1)
+        productDetailPage.clickAddToCartButton()
+        productDetailPage.clickSignOutButton()
+        productDetailPage.clickSignInButton()
+        loginPage.enterEmail('desk@desk.com')
+        loginPage.enterPassword('desk1')
+        loginPage.clickLoginButton()
+        myaccountPage.clickCart()
+        assert('1x $325.00', cartPage.productCost.getText())
+        assert('Sub total: $325.00', cartPage.subTotal.getText())
+    })
+})
