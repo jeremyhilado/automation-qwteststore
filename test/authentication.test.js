@@ -12,7 +12,7 @@ describe('Authentication Tests', function() {
         loginPage.clickLoginButton()
         browser.waitUntil(() => {
             return browser.getUrl() === 'https://qw-test-store-prod.netlify.app/myaccount/'
-        }, 10000, 'expect url to change')
+        }, 5000, 'expect url to change')
         expect(browser.getUrl()).equals('https://qw-test-store-prod.netlify.app/myaccount/')
     })
 
@@ -20,12 +20,12 @@ describe('Authentication Tests', function() {
         myAccountPage.clickSignOutButton()
         browser.waitUntil(() => {
             return browser.getUrl() === 'https://qw-test-store-prod.netlify.app/login/'
-        }, 10000, 'expect url to change')
+        }, 5000, 'expect url to change')
         loginPage.enterEmail('desk@desk.com')
         loginPage.enterPassword('1desk')
         loginPage.clickLoginButton()
         loginPage.loginErrorMessage.waitForDisplayed()
-        assert('Please check your login details and try again.', loginPage.loginErrorMessage.getText())
+        assert.equal('Please check your login details and try again.', loginPage.loginErrorMessage.getText())
     })
 
     it('should get password required error message', () => {
@@ -34,7 +34,7 @@ describe('Authentication Tests', function() {
         loginPage.enterEmail('desk@desk.com')
         loginPage.clickLoginButton()
         loginPage.passwordRequiredMessage.waitForDisplayed()
-        assert('Password is required', loginPage.passwordRequiredMessage.getText())
+        assert.equal('Password is required', loginPage.passwordRequiredMessage.getText())
     })
 
     it('should get email required error message', () => {
@@ -43,7 +43,7 @@ describe('Authentication Tests', function() {
         loginPage.enterPassword('desk1')
         loginPage.clickLoginButton()
         loginPage.emailRequiredMessage.waitForDisplayed()
-        assert('Email address is required', loginPage.emailRequiredMessage.getText())
+        assert.equal('Email address is required', loginPage.emailRequiredMessage.getText())
     })    
 
     it('should get email and password required error messages', () => {
@@ -52,7 +52,7 @@ describe('Authentication Tests', function() {
         loginPage.clickLoginButton()
         loginPage.emailRequiredMessage.waitForDisplayed()
         loginPage.passwordRequiredMessage.waitForDisplayed()
-        assert('Email address is required', loginPage.emailRequiredMessage.getText())
-        assert('Password is required', loginPage.passwordRequiredMessage.getText())
+        assert.equal('Email address is required', loginPage.emailRequiredMessage.getText())
+        assert.equal('Password is required', loginPage.passwordRequiredMessage.getText())
     })
 })
