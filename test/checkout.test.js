@@ -10,6 +10,9 @@ describe('Checkout Tests', function() {
         browser.url('/')
         homePage.clickProduct(1)
         productDetailPage.clickAddToCartButton()
+        browser.waitUntil(() => {
+            return productDetailPage.cart.getText() === 'Cart (1)'
+        }, 5000, 'expect cart qty to update')
         productDetailPage.clickCart()
         cartPage.clickCheckoutButton()
         browser.switchToFrame(cartPage.iFrame)
@@ -37,6 +40,9 @@ describe('Checkout Tests', function() {
         myaccountPage.clickHomePageLink()
         homePage.clickProduct(1)
         productDetailPage.clickAddToCartButton()
+        browser.waitUntil(() => {
+            return productDetailPage.cart.getText() === 'Cart (1)'
+        }, 5000, 'expect cart qty to update')
         productDetailPage.clickCart()
         cartPage.clickCheckoutButton()
         browser.switchToFrame(cartPage.iFrame)
